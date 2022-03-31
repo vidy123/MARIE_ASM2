@@ -1,0 +1,56 @@
+     ORG 00       
+Wait1:  Load     WAITPATTERN1 
+        OUTPUT                      // send out the waiting signal 
+        INPUT                       // scan input port for change
+        Subt     LASTINPUT
+brian:  Skipcond 400                // no change, stay in wait loop 
+        Jump     GetFrameStart
+        Jump     Wait1
+GetFrameStart:   INPUT              // get animation frame start from input
+        Store    LASTINPUT
+        Store    FRAMETOP
+Wait2:  Load     WAITPATTERN2  
+        OUTPUT                      // send out the waiting signal 
+        INPUT                       // scan input port for change  
+        Subt   LASTINPUT
+        Skipcond 400                // no change, stay in wait loop 
+thing:  Jump   GetFrameLen
+        Jump   Wait2
+GetFrameLen:   INPUT                // get animation length from input
+        Store  LASTINPUT
+        Store  LOOPINIT
+Top:    Load   LOOPINIT   
+        Store  LOOPVAR              // initialize loop counter
+        Load   FRAMETOP     
+thing2: Store  MEMPOINTER           // initialize frame pointer
+Loop:   LoadI   MEMPOINTER          // load frame pattern to ac
+        Output                      // output pattern to Traffic light 
+        Load    MEMPOINTER        
+        Add     ONE                 // increment frame pointer
+        Store   MEMPOINTER            
+good:   Load    LOOPVAR            
+        Subt    ONE                 // decrement loop counter
+        Store   LOOPVAR            
+        Skipcond 400                // if loop counter == 0, goto Top
+        Jump     Loop               // otherwise stay in loop
+        Jump     Top 
+        Halt                        // never reach this point
+LASTINPUT:  Hex  0
+FRAMETOP:   Hex  0         
+MEMPOINTER:    Hex   0        
+LOOPINIT:  Hex   0        
+LOOPVAR:   Hex   0            
+ONE:       Hex     1  
+WAITPATTERN1:  Hex   8000
+WAITPATTERN2:  Hex   8001
+FRAME1:  Hex  0010
+FRAME2:  Hex  0008
+FRAME3:  Hex  0004
+FRAME4:  Hex  0002
+FRAME5:  Hex  0001
+FRAME6:  Hex  0800
+FRAME7:  Hex  1000
+FRAME8:  Hex  2000
+FRAME9:  Hex  4000
+FRAMEA:  Hex  8000
+    END

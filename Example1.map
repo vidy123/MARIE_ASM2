@@ -1,0 +1,32 @@
+ ------------------------
+ Symbol        | Location
+ --------------+---------
+ FRAME1        |   02C
+ FRAME2        |   02D
+ FRAME3        |   02E
+ FRAME4        |   02F
+ FRAME5        |   030
+ FRAME6        |   031
+ FRAME7        |   032
+ FRAME8        |   033
+ FRAME9        |   034
+ FRAMEA        |   035
+ FRAMETOP      |   025
+ GetFrameLen   |   011
+ GetFrameStart |   007
+ LASTINPUT     |   024
+ LOOPINIT      |   027
+ LOOPVAR       |   028
+ Loop          |   018
+ MEMPOINTER    |   026
+ ONE           |   029
+ Top           |   014
+ WAITPATTERN1  |   02A
+ WAITPATTERN2  |   02B
+ Wait1         |   000
+ Wait2         |   00A
+ brian         |   004
+ good          |   01D
+ thing         |   00F
+ thing2        |   017
+

@@ -1,0 +1,97 @@
+     Assembly listing for: Example1.mas
+                Assembled: Thu Mar 31 01:26:55 GMT 2022
+
+         |                ORG 00                   
+000 102A |  Wait1         LOAD WAITPATTERN1        
+001 6000 |                OUTPUT                  // send out the waiting signal 
+002 5000 |                INPUT                   // scan input port for change
+003 4024 |                SUBT LASTINPUT           
+004 8400 |  brian         SKIPCOND 400            // no change, stay in wait loop 
+005 9007 |                JUMP GetFrameStart       
+006 9000 |                JUMP Wait1               
+007 5000 |  GetFrameStart INPUT                   // get animation frame start from input
+008 2024 |                STORE LASTINPUT          
+009 2025 |                STORE FRAMETOP           
+00A 102B |  Wait2         LOAD WAITPATTERN2        
+00B 6000 |                OUTPUT                  // send out the waiting signal 
+00C 5000 |                INPUT                   // scan input port for change  
+00D 4024 |                SUBT LASTINPUT           
+00E 8400 |                SKIPCOND 400            // no change, stay in wait loop 
+00F 9011 |  thing         JUMP GetFrameLen         
+010 900A |                JUMP Wait2               
+011 5000 |  GetFrameLen   INPUT                   // get animation length from input
+012 2024 |                STORE LASTINPUT          
+013 2027 |                STORE LOOPINIT           
+014 1027 |  Top           LOAD LOOPINIT            
+015 2028 |                STORE LOOPVAR           // initialize loop counter
+016 1025 |                LOAD FRAMETOP            
+017 2026 |  thing2        STORE MEMPOINTER        // initialize frame pointer
+018 D026 |  Loop          LOADI MEMPOINTER        // load frame pattern to ac
+019 6000 |                OUTPUT                  // output pattern to Traffic light 
+01A 1026 |                LOAD MEMPOINTER          
+01B 3029 |                ADD ONE                 // increment frame pointer
+01C 2026 |                STORE MEMPOINTER         
+01D 1028 |  good          LOAD LOOPVAR             
+01E 4029 |                SUBT ONE                // decrement loop counter
+01F 2028 |                STORE LOOPVAR            
+020 8400 |                SKIPCOND 400            // if loop counter == 0, goto Top
+021 9018 |                JUMP Loop               // otherwise stay in loop
+022 9014 |                JUMP Top                 
+023 7000 |                HALT                    // never reach this point
+024 0000 |  LASTINPUT     HEX 0                    
+025 0000 |  FRAMETOP      HEX 0                    
+026 0000 |  MEMPOINTER    HEX 0                    
+027 0000 |  LOOPINIT      HEX 0                    
+028 0000 |  LOOPVAR       HEX 0                    
+029 0001 |  ONE           HEX 1                    
+02A 8000 |  WAITPATTERN1  HEX 8000                 
+02B 8001 |  WAITPATTERN2  HEX 8001                 
+02C 0010 |  FRAME1        HEX 0010                 
+02D 0008 |  FRAME2        HEX 0008                 
+02E 0004 |  FRAME3        HEX 0004                 
+02F 0002 |  FRAME4        HEX 0002                 
+030 0001 |  FRAME5        HEX 0001                 
+031 0800 |  FRAME6        HEX 0800                 
+032 1000 |  FRAME7        HEX 1000                 
+033 2000 |  FRAME8        HEX 2000                 
+034 4000 |  FRAME9        HEX 4000                 
+035 8000 |  FRAMEA        HEX 8000                 
+         |                END                      
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ---------------------------------------------------------
+          Symbol        | Defined | References 
+         ---------------+---------+-------------------------------
+          FRAME1        |   02C   | 
+          FRAME2        |   02D   | 
+          FRAME3        |   02E   | 
+          FRAME4        |   02F   | 
+          FRAME5        |   030   | 
+          FRAME6        |   031   | 
+          FRAME7        |   032   | 
+          FRAME8        |   033   | 
+          FRAME9        |   034   | 
+          FRAMEA        |   035   | 
+          FRAMETOP      |   025   | 009, 016
+          GetFrameLen   |   011   | 00F
+          GetFrameStart |   007   | 005
+          LASTINPUT     |   024   | 003, 008, 00D, 012
+          LOOPINIT      |   027   | 013, 014
+          LOOPVAR       |   028   | 015, 01D, 01F
+          Loop          |   018   | 021
+          MEMPOINTER    |   026   | 017, 018, 01A, 01C
+          ONE           |   029   | 01B, 01E
+          Top           |   014   | 022
+          WAITPATTERN1  |   02A   | 000
+          WAITPATTERN2  |   02B   | 00A
+          Wait1         |   000   | 006
+          Wait2         |   00A   | 010
+          brian         |   004   | 
+          good          |   01D   | 
+          thing         |   00F   | 
+          thing2        |   017   | 
+         ---------------------------------------------------------
+
+
