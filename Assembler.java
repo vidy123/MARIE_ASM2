@@ -87,7 +87,7 @@ public class Assembler implements Serializable {
                                                         // only this many shown. 
 
   public static final int LABEL_DELIM   = (int) ':';   // Punctuation for a label statement.
-  public static final int COMMENT_DELIM = (int) '/';   // Punctuation for inline comment.
+  public static final int COMMENT_DELIM = (int) '/';   // Punctuation for inline comments.
   public static final String fileSeparator = System.getProperty("file.separator");
   public static final String lineFeed      = System.getProperty("line.separator");
   public static final String formFeed      = "\014";
